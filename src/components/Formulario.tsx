@@ -54,7 +54,13 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Formulario = () => {
+// Definimos la interfaz par los props
+interface IFormularioProps {
+  guardarResumen: Function;
+  guardarCargando: Function;
+}
+
+const Formulario = ({ guardarResumen, guardarCargando }: IFormularioProps) => {
   // Definimos el state del componente
   const [datos, guardarDatos] = useState({
     marca: "",
@@ -101,9 +107,17 @@ const Formulario = () => {
     // Dependiendo del plan: Completo aumenta 50%, Básico aumenta 20%
     let nIncremento: number = obtenerPlan(plan);
     resultado = Math.round(nIncremento * resultado * 100) / 100;
-    console.log(resultado);
+
+    guardarCargando(true);
 
     // Total
+    setTimeout(() => {
+      guardarCargando(false);
+      guardarResumen({
+        cotizacion: resultado,
+        datos,
+      });
+    }, 3000);
   };
 
   return (

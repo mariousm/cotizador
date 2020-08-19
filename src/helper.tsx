@@ -28,3 +28,8 @@ export function calcularMarca(marca: string): number {
 export function obtenerPlan(plan: string): number {
   return plan === "basico" ? 1.2 : 1.5;
 }
+
+// Muestra la primera letra en mayúscula
+export function primerMayuscula(texto: string) {
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
